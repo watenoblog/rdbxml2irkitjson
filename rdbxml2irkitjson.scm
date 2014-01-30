@@ -37,9 +37,8 @@
   (newline)
   )
 
-(define (main args)
-  (let* ((xml (ssax:xml->sxml (current-input-port) '()))
-         (arg-list '(header_high header_low
+(define (rdbxml2irkitjson xml)
+  (let* ((arg-list '(header_high header_low
                      stop_high   stop_low
                      code0_high  code0_low
                      code1_high  code1_low))
@@ -55,8 +54,13 @@
               (display (car ((sxpath '(@ name *text*)) b)))
               (display ":")
               (to-json (apply to-duration
-                 (string->number-list (car signal)) args))))
+                              (string->number-list (car signal)) args))))
          ((sxpath '(// button)) p)))
      ((sxpath '(// page)) xml))
     ))
+
+(define (main args)
+  (let1 xml (ssax:xml->sxml (current-input-port) '())
+    (rdbxml2irkitjson xml))
+  0)
 
