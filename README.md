@@ -1,4 +1,5 @@
-#rdbxml2irkitjson
+rdbxml2irkitjson
+================
 
 ##概要
 リモコンデータベースのxml形式をIRKitのjson形式に変換します。
